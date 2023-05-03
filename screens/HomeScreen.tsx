@@ -9,6 +9,7 @@ import {
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ChevronDown, Search, Sliders, User } from "lucide-react-native";
+import Categories from "../components/Categories";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -57,8 +58,9 @@ export default function HomeScreen() {
 
       {/* Body */}
 
-      <ScrollView>
+      <ScrollView className="bg-gray-100 px-4 pt-5">
         {/* Categories */}
+        <Categories />
 
         {/* Featured rows */}
       </ScrollView>
