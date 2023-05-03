@@ -1,7 +1,14 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { ChevronDown, User } from "lucide-react-native";
+import { ChevronDown, Search, Sliders, User } from "lucide-react-native";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -14,8 +21,6 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="bg-white pt-5">
-      <Text className="text-red-500"></Text>
-
       <View className="flex-row pb-3 mx-4 items-center space-x-3">
         <Image
           source={{
@@ -34,6 +39,29 @@ export default function HomeScreen() {
 
         <User size={25} color="#00CCBB" />
       </View>
+
+      {/* Search */}
+
+      {/* some styles in the next View were not needed -- 43:10 video */}
+      <View className="pb-2 mx-4">
+        <View className="flex-row space-x-2  bg-gray-200 p-3 items-center">
+          <Search color="gray" size={20} />
+          <TextInput
+            placeholder="Restaurants and cuisines"
+            keyboardType="default"
+            className="flex-1"
+          />
+          <Sliders color="#00CCBB" />
+        </View>
+      </View>
+
+      {/* Body */}
+
+      <ScrollView>
+        {/* Categories */}
+
+        {/* Featured rows */}
+      </ScrollView>
     </SafeAreaView>
   );
 }
