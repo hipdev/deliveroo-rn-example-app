@@ -6,20 +6,40 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { ChevronDown, Search, Sliders, User } from 'lucide-react-native'
 import Categories from '../components/Categories'
 import FeaturedRow from '../components/FeaturedRow'
+import sanityClient from '../lib/sanity'
 
 export default function HomeScreen() {
   const navigation = useNavigation()
+  const [featuredCategories, setFeaturedCategories] = useState()
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+    *[_type == "featured"] {
+      ...,
+      restaurants[]-> {
+        ...,
+        dishes[]->
+      }
+    }
+    `
+      )
+      .then((data) => setFeaturedCategories(data))
+  }, [])
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     })
   }, [])
+
+  console.log(featuredCategories, 'log data')
 
   return (
     <SafeAreaView className='bg-white pt-5'>
