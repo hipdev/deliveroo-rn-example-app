@@ -35,11 +35,11 @@ export default function HomeScreen() {
           <Text className='font-bold text-gray-400 text-xs'>Deliver now</Text>
           <Text className='font-bold text-xl'>
             Current location
-            <ChevronDown color='#00CCBB' />
+            <ChevronDown className='text-primary' />
           </Text>
         </View>
 
-        <User size={25} color='#00CCBB' />
+        <User size={25} className='text-primary' />
       </View>
 
       {/* Search */}
@@ -54,7 +54,7 @@ export default function HomeScreen() {
             className='flex-1'
           />
         </View>
-        <Sliders color='#00CCBB' />
+        <Sliders className='text-primary' />
       </View>
 
       {/* Body */}

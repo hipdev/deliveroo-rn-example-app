@@ -6,7 +6,11 @@ const Categories = () => {
   return (
     // I'm not using the inline styles here
 
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+    >
       {/* Horizontal View */}
 
       <CategoryCard imgUrl='https://links.papareact.com/wru' title='Title' />
