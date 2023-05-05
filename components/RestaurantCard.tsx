@@ -1,21 +1,34 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { MapPin, Star } from 'lucide-react-native'
+import {
+  Dish,
+  SanityImageAsset,
+  SanityImageCrop,
+  SanityImageHotspot,
+  SanityReference,
+} from '../sanity/types/schema'
+import { urlFor } from '../lib/sanity'
 
 type Props = {
   id: string
-  imgUrl: string
-  title: string
-  rating: number
-  genre: string
-  address: string
-  short_description: string
-  dishes: []
+  imgUrl?: {
+    _type: 'image'
+    asset: SanityReference<SanityImageAsset>
+    crop?: SanityImageCrop
+    hotspot?: SanityImageHotspot
+  }
+  title?: string
+  rating?: number
+  genre?: string
+  address?: string
+  short_description?: string
+  dishes?: Dish[]
   long: number
   lat: number
 }
 
-const RestaurantCards = ({
+const RestaurantCard = ({
   id,
   imgUrl,
   title,
@@ -29,7 +42,10 @@ const RestaurantCards = ({
 }: Props) => {
   return (
     <TouchableOpacity className='bg-white mr-3 shadow'>
-      <Image source={{ uri: imgUrl }} className='h-36 w-64 rounded-sm' />
+      <Image
+        source={{ uri: urlFor(imgUrl).url() }}
+        className='h-36 w-64 rounded-sm'
+      />
       <View className='px-3 pb-4'>
         <Text className='font-bold text-lg pt-2'>{title}</Text>
 
@@ -50,4 +66,4 @@ const RestaurantCards = ({
   )
 }
 
-export default RestaurantCards
+export default RestaurantCard

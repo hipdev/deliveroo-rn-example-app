@@ -14,6 +14,6 @@ const builder = imageUrlBuilder({
   dataset: 'production',
 })
 
-export const urlFor = (source: string) => builder.image(source)
+export const urlFor = (source: any) => builder.image(source)
 
 export default sanityClient

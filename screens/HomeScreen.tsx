@@ -13,9 +13,13 @@ import Categories from '../components/Categories'
 import FeaturedRow from '../components/FeaturedRow'
 import sanityClient from '../lib/sanity'
 
+import { Featured, Restaurant } from '../sanity/types/schema'
+
 export default function HomeScreen() {
   const navigation = useNavigation()
-  const [featuredCategories, setFeaturedCategories] = useState()
+  const [featuredCategories, setFeaturedCategories] = useState<
+    undefined | Featured[]
+  >()
 
   useEffect(() => {
     sanityClient
@@ -42,7 +46,7 @@ export default function HomeScreen() {
   console.log(featuredCategories, 'log data')
 
   return (
-    <SafeAreaView className='bg-white pt-5'>
+    <SafeAreaView className='bg-white pt-5 flex-1 pb-10'>
       <View className='flex-row pb-3 mx-4 items-center space-x-3'>
         <Image
           source={{
@@ -79,32 +83,25 @@ export default function HomeScreen() {
 
       {/* Body */}
 
-      <ScrollView className='bg-gray-100 px-4 pt-5'>
+      <ScrollView
+        className='bg-gray-100'
+        contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 10 }}
+      >
         {/* Categories */}
         <Categories />
 
         {/* Featured rows */}
 
-        <FeaturedRow
-          id='123'
-          title='Featured'
-          description='Paid placements from our partners'
-          featuredCategory='featured'
-        />
-
-        <FeaturedRow
-          id='1234'
-          title='Tasty Discounts'
-          description="Everyone's been enjoying these juicy discounts"
-          featuredCategory='discounts'
-        />
-
-        <FeaturedRow
-          id='12345'
-          title='offers near you!'
-          description='Why not support your local restaurant tonight!'
-          featuredCategory='offers'
-        />
+        {featuredCategories?.map((category) => (
+          <FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category?.short_description}
+            featuredCategory='featured'
+            restaurants={category?.restaurants as any}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   )
