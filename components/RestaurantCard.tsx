@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { MapPin, Star } from 'lucide-react-native'
 import {
-  Category,
   Dish,
   SanityImageAsset,
   SanityImageCrop,
@@ -10,8 +9,9 @@ import {
   SanityReference,
 } from '../sanity/types/schema'
 import { urlFor } from '../lib/sanity'
+import { useNavigation } from '@react-navigation/native'
 
-type Props = {
+export type RestaurantCard = {
   id: string
   imgUrl?: {
     _type: 'image'
@@ -40,9 +40,27 @@ const RestaurantCard = ({
   dishes,
   long,
   lat,
-}: Props) => {
+}: RestaurantCard) => {
+  const navigation = useNavigation()
+
   return (
-    <TouchableOpacity className='bg-white mr-3 shadow'>
+    <TouchableOpacity
+      className='bg-white mr-3 shadow'
+      onPress={() => {
+        navigation.navigate('Restaurant', {
+          id,
+          imgUrl,
+          title,
+          rating,
+          genre,
+          address,
+          short_description,
+          dishes,
+          long,
+          lat,
+        })
+      }}
+    >
       <Image
         source={{ uri: urlFor(imgUrl).url() }}
         className='h-36 w-64 rounded-sm'
