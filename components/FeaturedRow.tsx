@@ -1,7 +1,12 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { ArrowRight } from 'lucide-react-native'
-import { Restaurant, SanityKeyedReference } from '../sanity/types/schema'
+import {
+  Category,
+  Restaurant,
+  SanityKeyedReference,
+  SanityReference,
+} from '../sanity/types/schema'
 import RestaurantCard from './RestaurantCard'
 
 type Props = {
@@ -9,7 +14,7 @@ type Props = {
   title?: string
   description?: string
   featuredCategory: string
-  restaurants?: Restaurant[]
+  restaurants?: (Omit<Restaurant, 'type'> & { type: { name: string } })[] // lol
 }
 
 const FeaturedRow = ({
@@ -33,14 +38,14 @@ const FeaturedRow = ({
         className='pt-4'
         showsHorizontalScrollIndicator={false}
       >
-        {restaurants?.map((restaurant: Restaurant) => (
+        {restaurants?.map((restaurant) => (
           <RestaurantCard
             key={restaurant._id}
             id={restaurant._id}
             imgUrl={restaurant.image}
             title={restaurant?.name}
             rating={restaurant.rating}
-            genre='Japanese'
+            genre={restaurant?.type.name}
             address={restaurant?.address}
             short_description={restaurant?.short_description}
             dishes={restaurant?.dishes as any}

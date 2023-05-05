@@ -13,7 +13,7 @@ import Categories from '../components/Categories'
 import FeaturedRow from '../components/FeaturedRow'
 import sanityClient from '../lib/sanity'
 
-import { Featured, Restaurant } from '../sanity/types/schema'
+import { Featured } from '../sanity/types/schema'
 
 export default function HomeScreen() {
   const navigation = useNavigation()
@@ -21,17 +21,21 @@ export default function HomeScreen() {
     undefined | Featured[]
   >()
 
+  // I changed this query to only use one for all the children components
   useEffect(() => {
     sanityClient
       .fetch(
         `
-    *[_type == "featured"] {
-      ...,
-      restaurants[]-> {
-        ...,
-        dishes[]->
-      }
-    }
+        *[_type == "featured"] {
+          ...,
+          restaurants[]-> {
+            ...,
+            dishes[]->,
+            type-> {
+              name
+            }
+          }
+        }
     `
       )
       .then((data) => setFeaturedCategories(data))
@@ -42,8 +46,6 @@ export default function HomeScreen() {
       headerShown: false,
     })
   }, [])
-
-  console.log(featuredCategories, 'log data')
 
   return (
     <SafeAreaView className='bg-white pt-5 flex-1 pb-10'>
