@@ -78,6 +78,7 @@ export default function HomeScreen() {
             placeholder='Restaurants and cuisines'
             keyboardType='default'
             className='flex-1'
+            placeholderTextColor='#111'
           />
         </View>
         <Sliders className='text-primary' />
