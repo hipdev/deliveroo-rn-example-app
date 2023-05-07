@@ -3,7 +3,15 @@ import React, { useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { RestaurantCard } from '../components/RestaurantCard'
 import { urlFor } from '../lib/sanity'
-import { ArrowLeftIcon, LocateIcon, MapPin, Star } from 'lucide-react-native'
+import {
+  ArrowLeftIcon,
+  ChevronRight,
+  HelpCircle,
+  LocateIcon,
+  MapPin,
+  Star,
+} from 'lucide-react-native'
+import DishRow from '../components/DishRow'
 
 const RestaurantScreen = () => {
   const navigation = useNavigation()
@@ -46,6 +54,7 @@ const RestaurantScreen = () => {
         <ArrowLeftIcon size={20} color='#00CCBB' />
       </TouchableOpacity>
 
+      {/* Header */}
       <View className='bg-white'>
         <View className='px-4 pt-4'>
           <Text className='text-3xl font-bold'>{title}</Text>
@@ -70,6 +79,24 @@ const RestaurantScreen = () => {
 
           <Text className='text-gray-500 mt-2 pb-4'>{short_description}</Text>
         </View>
+
+        <TouchableOpacity className='flex-row items-center space-x-2 p-4 border-y border-gray-300'>
+          <HelpCircle color='gray' opacity={0.6} size={20} />
+          <Text className='flex-1 pl-2 text-md font-bold'>
+            Have a food allergy ?
+          </Text>
+          <ChevronRight className='text-primary' />
+        </TouchableOpacity>
+      </View>
+
+      {/* Menu */}
+      <View>
+        <Text className='px-4 pt-6 mb-3 font-bold text-xl'>Menu</Text>
+
+        {/* Dishrows */}
+        {dishes?.map((dish) => (
+          <DishRow key={dish._id} {...dish} />
+        ))}
       </View>
     </ScrollView>
   )
