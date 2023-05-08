@@ -5,19 +5,25 @@ import { Dish } from '../sanity/types/schema'
 import { formatCurrency } from 'react-native-format-currency'
 import { urlFor } from '../lib/sanity'
 import { MinusCircle, PlusCircle } from 'lucide-react-native'
+import { useBasketStore } from '../stores/basketStore'
 
-const DishRow = (dish: Dish) => {
-  const [isPressed, setIsPressed] = useState(true)
+const DishRow = ({ dish }: { dish: Dish }) => {
+  const { items, addItem, removeItem } = useBasketStore()
+
+  const [isPressed, setIsPressed] = useState(false)
   // This is a great library to handle currency formats
   const [valueFormattedWithSymbol] = formatCurrency({
     amount: dish.price || 0,
     code: 'GBP',
   })
+
   return (
     <>
       <TouchableOpacity
         onPress={() => setIsPressed(!isPressed)}
-        className='bg-white border p-4 border-gray-200'
+        className={`bg-white border p-4 border-gray-200 ${
+          isPressed && ' border-b-0'
+        }`}
       >
         <View className='flex-row'>
           <View className='flex-1 pr-3'>
@@ -44,13 +50,13 @@ const DishRow = (dish: Dish) => {
       {isPressed && (
         <View className='bg-white px-4'>
           <View className='flex-row items-center space-x-2 pb-3'>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => removeItem(dish)}>
               <MinusCircle size={30} className='text-primary' />
             </TouchableOpacity>
 
-            <Text>0</Text>
+            <Text>{items.filter((item) => item._id == dish._id).length}</Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => addItem(dish)}>
               <PlusCircle size={30} className='text-primary' />
             </TouchableOpacity>
           </View>

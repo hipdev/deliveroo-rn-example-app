@@ -31,8 +31,6 @@ const RestaurantScreen = () => {
     title,
   } = params
 
-  console.log(id, lat, 'logs')
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -95,7 +93,7 @@ const RestaurantScreen = () => {
 
         {/* Dishrows */}
         {dishes?.map((dish) => (
-          <DishRow key={dish._id} {...dish} />
+          <DishRow key={dish._id} dish={dish} />
         ))}
       </View>
     </ScrollView>
