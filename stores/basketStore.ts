@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { Dish } from '../sanity/types/schema'
 
-interface BasketStore {
+type BasketStore = {
   items: Dish[]
   addItem: (item: Dish) => void
   removeItem: (item: Dish) => void

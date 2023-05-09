@@ -17,6 +17,7 @@ const DishRow = ({ dish }: { dish: Dish }) => {
     code: 'GBP',
   })
 
+  const totalItems = items.filter((item) => item._id == dish._id).length
   return (
     <>
       <TouchableOpacity
@@ -50,8 +51,18 @@ const DishRow = ({ dish }: { dish: Dish }) => {
       {isPressed && (
         <View className='bg-white px-4'>
           <View className='flex-row items-center space-x-2 pb-3'>
-            <TouchableOpacity onPress={() => removeItem(dish)}>
-              <MinusCircle size={30} className='text-primary' />
+            <TouchableOpacity
+              disabled={!totalItems}
+              onPress={() => {
+                if (totalItems == 0) return
+
+                removeItem(dish)
+              }}
+            >
+              <MinusCircle
+                size={30}
+                className={totalItems == 0 ? 'text-gray-400' : 'text-primary'}
+              />
             </TouchableOpacity>
 
             <Text>{items.filter((item) => item._id == dish._id).length}</Text>
