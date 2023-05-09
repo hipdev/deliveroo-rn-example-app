@@ -6,9 +6,10 @@ type BasketStore = {
   addItem: (item: Dish) => void
   removeItem: (item: Dish) => void
   clearBasket: () => void
+  getTotal: () => number
 }
 
-export const useBasketStore = create<BasketStore>((set) => ({
+export const useBasketStore = create<BasketStore>((set, get) => ({
   items: [],
   addItem: (item) => set((state) => ({ items: [...state.items, item] })),
   removeItem: (item) =>
@@ -25,4 +26,6 @@ export const useBasketStore = create<BasketStore>((set) => ({
       }
     }),
   clearBasket: () => set({ items: [] }),
+  getTotal: () =>
+    get().items.reduce((total, item) => (total += item.price || 0), 0),
 }))

@@ -6,6 +6,7 @@ import { formatCurrency } from 'react-native-format-currency'
 import { urlFor } from '../lib/sanity'
 import { MinusCircle, PlusCircle } from 'lucide-react-native'
 import { useBasketStore } from '../stores/basketStore'
+import BasketIcon from './Basket'
 
 const DishRow = ({ dish }: { dish: Dish }) => {
   const { items, addItem, removeItem } = useBasketStore()
@@ -22,15 +23,15 @@ const DishRow = ({ dish }: { dish: Dish }) => {
     <>
       <TouchableOpacity
         onPress={() => setIsPressed(!isPressed)}
-        className={`bg-white border p-4 border-gray-200 ${
+        className={`border border-gray-200 bg-white p-4 ${
           isPressed && ' border-b-0'
         }`}
       >
         <View className='flex-row'>
           <View className='flex-1 pr-3'>
-            <Text className='text-lg mb-1'>{dish.name}</Text>
+            <Text className='mb-1 text-lg'>{dish.name}</Text>
             <Text className='text-gray-400'>{dish.short_description}</Text>
-            <Text className='text-gray-400 mt-2'>
+            <Text className='mt-2 text-gray-400'>
               {valueFormattedWithSymbol}
             </Text>
           </View>
