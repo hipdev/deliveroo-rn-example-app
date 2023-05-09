@@ -7,7 +7,6 @@ import {
   ArrowLeftIcon,
   ChevronRight,
   HelpCircle,
-  LocateIcon,
   MapPin,
   Star,
 } from 'lucide-react-native'
@@ -91,7 +90,7 @@ const RestaurantScreen = () => {
         </View>
 
         {/* Menu */}
-        <View>
+        <View className='pb-32'>
           <Text className='mb-3 px-4 pt-6 text-xl font-bold'>Menu</Text>
 
           {/* Dishrows */}
