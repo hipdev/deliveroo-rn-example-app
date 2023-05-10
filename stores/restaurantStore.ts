@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 import { Restaurant } from '../sanity/types/schema'
-import { RestaurantCardProps } from '../components/RestaurantCard'
+import { RestaurantFixed } from '../components/RestaurantCard'
 
 // Selected Restaurant Store
 
 type RestaurantStore = {
-  restaurant: RestaurantCardProps
-  setRestaurant: (restaurant: RestaurantCardProps) => void
+  restaurant: RestaurantFixed
+  setRestaurant: (restaurant: RestaurantFixed) => void
 }
 
 export const useRestaurantStore = create<RestaurantStore>((set, get) => ({
-  restaurant: {} as RestaurantCardProps,
+  restaurant: {} as RestaurantFixed,
   setRestaurant: (restaurant) => set({ restaurant }),
 }))

@@ -1,15 +1,19 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { MapPin, Star } from 'lucide-react-native'
+
 import { Dish, Restaurant } from '../sanity/types/schema'
 import { urlFor } from '../lib/sanity'
+
 import { useNavigation } from '@react-navigation/native'
 
 export type RestaurantCardProps = {
-  restaurant: Omit<Restaurant, 'type' | 'dishes'> & {
-    type: { name: string }
-    dishes: Dish[]
-  }
+  restaurant: RestaurantFixed
+}
+
+export type RestaurantFixed = Omit<Restaurant, 'type' | 'dishes'> & {
+  type: { name: string }
+  dishes: Dish[]
 }
 
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
@@ -21,7 +25,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
     <TouchableOpacity
       className='mr-3 bg-white shadow'
       onPress={() => {
-        navigation.navigate('Restaurant', { restaurant: { ...restaurant } })
+        navigation.navigate('Restaurant', { ...restaurant })
       }}
     >
       <Image

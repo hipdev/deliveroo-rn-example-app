@@ -5,7 +5,10 @@ import 'react-native-url-polyfill/auto'
 import HomeScreen from './screens/HomeScreen'
 import RestaurantScreen from './screens/RestaurantScreen'
 import BasketScreen from './screens/BasketScreen'
-import { RestaurantCardProps } from './components/RestaurantCard'
+import {
+  RestaurantCardProps,
+  RestaurantFixed,
+} from './components/RestaurantCard'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,7 +16,7 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       Home: undefined
-      Restaurant: RestaurantCardProps
+      Restaurant: RestaurantFixed
       Basket: undefined
     }
   }

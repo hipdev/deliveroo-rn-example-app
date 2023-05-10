@@ -15,6 +15,8 @@ const Basket = () => {
     code: 'GBP',
   })
 
+  if (items.length === 0) return null
+
   return (
     <View className='absolute bottom-10 z-20 w-full'>
       <TouchableOpacity
