@@ -4,7 +4,8 @@ import 'react-native-url-polyfill/auto'
 
 import HomeScreen from './screens/HomeScreen'
 import RestaurantScreen from './screens/RestaurantScreen'
-import { RestaurantCard } from './components/RestaurantCard'
+import BasketScreen from './screens/BasketScreen'
+import { RestaurantCardProps } from './components/RestaurantCard'
 
 const Stack = createNativeStackNavigator()
 
@@ -12,7 +13,8 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       Home: undefined
-      Restaurant: RestaurantCard
+      Restaurant: RestaurantCardProps
+      Basket: undefined
     }
   }
 }
@@ -23,6 +25,14 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Restaurant' component={RestaurantScreen} />
+        <Stack.Screen
+          name='Basket'
+          component={BasketScreen}
+          options={{
+            presentation: 'modal',
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

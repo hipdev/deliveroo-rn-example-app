@@ -1,82 +1,45 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { MapPin, Star } from 'lucide-react-native'
-import {
-  Dish,
-  SanityImageAsset,
-  SanityImageCrop,
-  SanityImageHotspot,
-  SanityReference,
-} from '../sanity/types/schema'
+import { Dish, Restaurant } from '../sanity/types/schema'
 import { urlFor } from '../lib/sanity'
 import { useNavigation } from '@react-navigation/native'
 
-export type RestaurantCard = {
-  id: string
-  imgUrl?: {
-    _type: 'image'
-    asset: SanityReference<SanityImageAsset>
-    crop?: SanityImageCrop
-    hotspot?: SanityImageHotspot
+export type RestaurantCardProps = {
+  restaurant: Omit<Restaurant, 'type' | 'dishes'> & {
+    type: { name: string }
+    dishes: Dish[]
   }
-  title?: string
-  rating?: number
-  genre?: string
-  address?: string
-  short_description?: string
-  dishes?: Dish[]
-  long: number
-  lat: number
 }
 
-const RestaurantCard = ({
-  id,
-  imgUrl,
-  title,
-  rating,
-  genre,
-  address,
-  short_description,
-  dishes,
-  long,
-  lat,
-}: RestaurantCard) => {
+const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   const navigation = useNavigation()
+
+  const { image, rating, type, address, name } = restaurant
 
   return (
     <TouchableOpacity
-      className='bg-white mr-3 shadow'
+      className='mr-3 bg-white shadow'
       onPress={() => {
-        navigation.navigate('Restaurant', {
-          id,
-          imgUrl,
-          title,
-          rating,
-          genre,
-          address,
-          short_description,
-          dishes,
-          long,
-          lat,
-        })
+        navigation.navigate('Restaurant', { restaurant: { ...restaurant } })
       }}
     >
       <Image
-        source={{ uri: urlFor(imgUrl).url() }}
+        source={{ uri: urlFor(image).url() }}
         className='h-36 w-64 rounded-sm'
       />
       <View className='px-3 pb-4'>
-        <Text className='font-bold text-lg pt-2'>{title}</Text>
+        <Text className='pt-2 text-lg font-bold'>{name}</Text>
 
         {/* Rates */}
         <View className='flex-row items-center space-x-2'>
           <Star fill='green' color='green' opacity={0.5} size={17} />
           <Text className='text-xs text-gray-500'>
-            <Text className='text-green-500'>{rating}</Text> · {genre}
+            <Text className='text-green-500'>{rating}</Text> · {type.name}
           </Text>
         </View>
 
-        <View className='flex-row items-center space-x-1 mt-1'>
+        <View className='mt-1 flex-row items-center space-x-1'>
           <MapPin color='gray' opacity={0.4} size={20} />
           <Text className='text-xs text-gray-500'>Nearby · {address}</Text>
         </View>

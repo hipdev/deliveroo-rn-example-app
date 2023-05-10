@@ -1,22 +1,15 @@
 import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { ArrowRight } from 'lucide-react-native'
-import {
-  Category,
-  Restaurant,
-  SanityKeyedReference,
-  SanityReference,
-} from '../sanity/types/schema'
-import RestaurantCard from './RestaurantCard'
+import RestaurantCard, { RestaurantCardProps } from './RestaurantCard'
 
 type Props = {
   id: string
   title?: string
   description?: string
   featuredCategory: string
-  restaurants?: (Omit<Restaurant, 'type'> & { type: { name: string } })[] // lol
+  restaurants?: RestaurantCardProps['restaurant'][]
 }
-
 const FeaturedRow = ({
   id,
   title,
@@ -27,7 +20,7 @@ const FeaturedRow = ({
   return (
     <View>
       <View className='mt-4 flex-row items-center justify-between'>
-        <Text className='font-bold text-lg'>{title}</Text>
+        <Text className='text-lg font-bold'>{title}</Text>
         <ArrowRight className='text-primary' />
       </View>
 
@@ -39,19 +32,7 @@ const FeaturedRow = ({
         showsHorizontalScrollIndicator={false}
       >
         {restaurants?.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant._id}
-            id={restaurant._id}
-            imgUrl={restaurant.image}
-            title={restaurant?.name}
-            rating={restaurant.rating}
-            genre={restaurant?.type.name}
-            address={restaurant?.address}
-            short_description={restaurant?.short_description}
-            dishes={restaurant?.dishes as any}
-            long={20}
-            lat={0}
-          />
+          <RestaurantCard key={restaurant._id} restaurant={restaurant} />
         ))}
       </ScrollView>
     </View>
