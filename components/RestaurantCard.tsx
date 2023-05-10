@@ -1,11 +1,11 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
-import { MapPin, Star } from 'lucide-react-native'
-
-import { Dish, Restaurant } from '../sanity/types/schema'
-import { urlFor } from '../lib/sanity'
-
 import { useNavigation } from '@react-navigation/native'
+
+import { MapPin, Star } from 'lucide-react-native'
+import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+
+import { urlFor } from '../lib/sanity'
+import { Dish, Restaurant } from '../sanity/types/schema'
 
 export type RestaurantCardProps = {
   restaurant: RestaurantFixed

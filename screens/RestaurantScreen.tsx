@@ -1,11 +1,5 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import {
-  RestaurantCardProps,
-  RestaurantFixed,
-} from '../components/RestaurantCard'
-import { urlFor } from '../lib/sanity'
+
 import {
   ArrowLeftIcon,
   ChevronRight,
@@ -13,8 +7,13 @@ import {
   MapPin,
   Star,
 } from 'lucide-react-native'
-import DishRow from '../components/DishRow'
+import React, { useEffect, useLayoutEffect } from 'react'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+
 import Basket from '../components/Basket'
+import DishRow from '../components/DishRow'
+import { RestaurantFixed } from '../components/RestaurantCard'
+import { urlFor } from '../lib/sanity'
 import { useRestaurantStore } from '../stores/restaurantStore'
 
 const RestaurantScreen = () => {
