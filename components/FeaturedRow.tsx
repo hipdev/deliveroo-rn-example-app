@@ -1,6 +1,7 @@
-import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
 import { ArrowRight } from 'lucide-react-native'
+import React from 'react'
+import { ScrollView, Text, View } from 'react-native'
+
 import RestaurantCard, { RestaurantCardProps } from './RestaurantCard'
 
 type Props = {

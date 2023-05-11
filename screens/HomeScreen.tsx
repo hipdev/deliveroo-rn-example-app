@@ -1,25 +1,27 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  TextInput,
-  ScrollView,
-} from 'react-native'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+
 import { ChevronDown, Search, Sliders, User } from 'lucide-react-native'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native'
+
 import Categories from '../components/Categories'
 import FeaturedRow from '../components/FeaturedRow'
 import sanityClient from '../lib/sanity'
-
 import { Featured } from '../sanity/types/schema'
+
+type FeaturedCategoriesType = Featured[] | undefined
 
 export default function HomeScreen() {
   const navigation = useNavigation()
-  const [featuredCategories, setFeaturedCategories] = useState<
-    undefined | Featured[]
-  >()
+  const [featuredCategories, setFeaturedCategories] =
+    useState<FeaturedCategoriesType>()
 
   // I changed this query to only use one for all the children components
   useEffect(() => {
@@ -102,7 +104,7 @@ export default function HomeScreen() {
             title={category.name}
             description={category?.short_description}
             featuredCategory='featured'
-            restaurants={category?.restaurants as any}
+            restaurants={category?.restaurants as []}
           />
         ))}
       </ScrollView>
