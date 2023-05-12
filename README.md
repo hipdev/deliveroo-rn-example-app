@@ -1,5 +1,9 @@
 # First app, the Deliveroo clone <br> of [React Native crash course](https://www.youtube.com/watch?v=AkEnidfZnCU) from the amazing Sonny
 
+Preview of this repo:
+[deliveroo-clone.webm](https://github.com/hipdev/deliveroo-rn-example-app/assets/48492084/d9093f84-70d5-4437-b68a-89677054c680)
+
+
 ## Important considerations
 
 - If you don't see the web available in your terminal is because is not installed by default now with Expo, you will need to install another packages:
