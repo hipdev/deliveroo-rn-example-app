@@ -18,6 +18,7 @@ or whatever seems to date at your time reading this xD.
 - No Redux, is using [Zustand](https://github.com/pmndrs/zustand) instead.
 - Using prettier with prettier plugin to sort classes based on [Tailwind recommended class order](https://tailwindcss.com/blog/automatic-class-sorting-with-prettier#how-classes-are-sorted).
 - Is using also a [prettier import sorter](https://github.com/trivago/prettier-plugin-sort-imports), I have an OCD with imports 😅.
+- I'm using Reanimated 3 and not the oldie react-native-animatable
 
 ### If you get an error at 1:38 trying to get the Sanity data, please
 
