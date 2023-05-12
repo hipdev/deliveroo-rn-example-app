@@ -20,7 +20,11 @@ or whatever seems to date at your time reading this xD.
 - Is using also a [prettier import sorter](https://github.com/trivago/prettier-plugin-sort-imports), I have an OCD with imports 😅.
 - I'm using Reanimated 3 and not the oldie react-native-animatable
 
-### If you get an error at 1:38 trying to get the Sanity data, please
+## Troubleshooting
+
+- If build is not working for you because of some libraries like animatable on iOS. Please use Xcode 14.0.1 or greater, clear your cache and try again.
+
+- If you get an error at 1:38:10 trying to get the Sanity data, please
 
 ```javascript
 yarn add react-native-url-polyfill
