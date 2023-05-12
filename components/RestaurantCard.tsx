@@ -33,7 +33,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
         className='h-36 w-64 rounded-sm'
       />
       <View className='px-3 pb-4'>
-        <Text className='pt-2 text-lg font-bold'>{name}</Text>
+        <Text className='pt-2 text-lg font-bold text-gray-800'>{name}</Text>
 
         {/* Rates */}
         <View className='flex-row items-center space-x-2'>
