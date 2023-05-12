@@ -3,11 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import 'react-native-url-polyfill/auto'
 
-import {
-  RestaurantCardProps,
-  RestaurantFixed,
-} from './components/RestaurantCard'
+import { RestaurantFixed } from './components/RestaurantCard'
 import BasketScreen from './screens/BasketScreen'
+import DeliveryScreen from './screens/DeliveryScreen'
 import HomeScreen from './screens/HomeScreen'
 import PreparingOrderScreen from './screens/PreparingOrderScreen'
 import RestaurantScreen from './screens/RestaurantScreen'
@@ -21,6 +19,7 @@ declare global {
       Restaurant: RestaurantFixed
       Basket: undefined
       PreparingOrderScreen: undefined
+      Delivery: undefined
     }
   }
 }
@@ -42,6 +41,11 @@ export default function App() {
         <Stack.Screen
           name='PreparingOrderScreen'
           component={PreparingOrderScreen}
+          options={{ presentation: 'fullScreenModal', headerShown: false }}
+        />
+        <Stack.Screen
+          name='Delivery'
+          component={DeliveryScreen}
           options={{ presentation: 'fullScreenModal', headerShown: false }}
         />
       </Stack.Navigator>
